@@ -26,3 +26,4 @@ python day_1/main.py
 ### Progress
 
 - [x] DAY 1
+- [x] DAY 2
