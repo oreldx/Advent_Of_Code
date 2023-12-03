@@ -27,3 +27,4 @@ python day_1/main.py
 
 - [x] DAY 1
 - [x] DAY 2
+- [x] DAY 3
