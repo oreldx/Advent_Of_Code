@@ -1,4 +1,4 @@
-# Advent of Code [Year]
+# [Advent of Code [2023]](https://adventofcode.com/2023)
 
 This repository contains my solutions for the Advent of Code 2023 challenges. Advent of Code is an annual event with daily programming puzzles that cover a range of difficulty levels and problem types.
 
