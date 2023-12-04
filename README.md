@@ -25,6 +25,7 @@ python day_1/main.py
 
 ### Progress
 
-- [x] DAY 1
-- [x] DAY 2
-- [x] DAY 3
+- [x] [DAY 1 - Trebuchet?!](https://adventofcode.com/2023/day/1)
+- [x] [DAY 2 - Cube Conundrum](https://adventofcode.com/2023/day/2)
+- [x] [DAY 3 - Gear Ratios](https://adventofcode.com/2023/day/3)
+- [x] [DAY 4 - Scratchcards ](https://adventofcode.com/2023/day/4)
