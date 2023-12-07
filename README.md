@@ -31,3 +31,4 @@ python day_1/main.py
 - [x] [DAY 4 - Scratchcards ](https://adventofcode.com/2023/day/4)
 - [ ] [DAY 5 - If You Give A Seed A Fertilizer ](https://adventofcode.com/2023/day/5)
 - [x] [DAY 6 - Wait For It ](https://adventofcode.com/2023/day/6)
+- [ ] [DAY 7 - Camel Cards ](https://adventofcode.com/2023/day/7)
