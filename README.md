@@ -34,4 +34,4 @@ python day_1/main.py
 - [x] [DAY 7 - Camel Cards ](https://adventofcode.com/2023/day/7)
 - [x] [DAY 8 - Haunted Wasteland ](https://adventofcode.com/2023/day/8)
 - [x] [DAY 9 - Mirage Maintenance ](https://adventofcode.com/2023/day/9)
-
+- [ ] [DAY 9 - Pipe Maze ](https://adventofcode.com/2023/day/10)
