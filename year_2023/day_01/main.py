@@ -2,7 +2,7 @@ import re
 
 
 def open_input():
-    with open("day_1/calibration_document.txt", 'r') as file:
+    with open("calibration_document.txt", 'r') as file:
         lines = file.readlines()
 
     if not lines:

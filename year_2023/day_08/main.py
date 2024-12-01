@@ -37,7 +37,7 @@ def open_input():
             "XXX = (XXX, XXX)",
         ]
     else:
-        with open("day_8/input.txt", 'r') as file:
+        with open("input.txt", 'r') as file:
             lines: list = file.read().split("\n")
             if lines[-1] == "":
                 lines.pop(-1)

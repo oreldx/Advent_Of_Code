@@ -14,7 +14,7 @@ def open_input():
             "Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11",
         ]
     else:
-        with open("day_4/input.txt", 'r') as file:
+        with open("input.txt", 'r') as file:
             lines = file.readlines()
 
         if not lines:

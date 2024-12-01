@@ -18,7 +18,7 @@ def open_input():
             ".664.598..",
         ]
     else:
-        with open("day_3/input.txt", 'r') as file:
+        with open("input.txt", 'r') as file:
             lines = file.readlines()
 
         if not lines:

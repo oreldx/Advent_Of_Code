@@ -16,7 +16,7 @@ def open_input():
             "QQQJA 483",
         ]
     else:
-        with open("day_7/input.txt", 'r') as file:
+        with open("input.txt", 'r') as file:
             lines: list = file.read().split("\n")
             if lines[-1] == "":
                 lines.pop(-1)

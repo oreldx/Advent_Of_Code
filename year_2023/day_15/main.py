@@ -9,7 +9,7 @@ def open_input() -> str:
 
     else:
         line = ""
-        with open("day_15/input.txt", 'r') as file:
+        with open("input.txt", 'r') as file:
             line: str = file.read().split("\n")[0]
 
     return line

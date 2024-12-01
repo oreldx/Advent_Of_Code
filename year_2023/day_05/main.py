@@ -14,10 +14,10 @@ from pprint import pprint
 
 def open_input():
 
-    file_path = "day_5/input.txt"
+    file_path = "input.txt"
     if DEBUG:
         print("DEBUG MODE ON")
-        file_path = "day_5/debug.txt"
+        file_path = "debug.txt"
 
     with open(file_path, 'r') as file:
         text = file.read()

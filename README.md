@@ -1,38 +1,60 @@
-# [Advent of Code [2023]](https://adventofcode.com/2023)
+# [Advent of Code](https://adventofcode.com)
 
-This repository contains my solutions for the Advent of Code 2023 challenges. Advent of Code is an annual event with daily programming puzzles that cover a range of difficulty levels and problem types.
+This repository contains my solutions for the Advent of Code challenges. Advent of Code is an annual event with daily programming puzzles that cover a range of difficulty levels and problem types.
+
+Joined events:
+- [2023](https://adventofcode.com/2023)
+- [2024](https://adventofcode.com/2024)
 
 ## Structure
 
-Each day's challenges are organized in separate directories named `day_X`, where `X` represents the day. 
+Each year's challenges are organized in separate directories named `year_YYYY`, where `YYYY` represents the year. Within each year, each day's challenges are organized in separate directories named `day_X`, where `X` represents the day index as a 2 digits number.
 
 ```bash
 AdventOfCode/
 │
-├── day_1/
-│   └── main.py
-├── day_2/
-│   ├── main.py
-...
+├── year_2023/
+│   ├── day_01/
+│   │   └── main.py
+│   ├── day_02/
+│   │   ├── main.py
+│   ...
+│
+├── year_2024/
+│   ├── day_01/
+│   │   └── main.py
+│   ├── day_02/
+│   │   ├── main.py
+│   ...
 ```
 
-Running the Solutions
+## Running the Solutions
 To run a solution, navigate to the specific day's directory and run the Python script for the part you're interested in. For example:
 
 ```bash
-python day_1/main.py
+cd ./year_2023/day_01
+python main.py
 ```
 
-### Progress
+## Progress
 
-- [x] [DAY 1 - Trebuchet?!](https://adventofcode.com/2023/day/1)
-- [x] [DAY 2 - Cube Conundrum](https://adventofcode.com/2023/day/2)
-- [x] [DAY 3 - Gear Ratios](https://adventofcode.com/2023/day/3)
-- [x] [DAY 4 - Scratchcards ](https://adventofcode.com/2023/day/4)
-- [ ] [DAY 5 - If You Give A Seed A Fertilizer ](https://adventofcode.com/2023/day/5)
-- [x] [DAY 6 - Wait For It ](https://adventofcode.com/2023/day/6)
-- [x] [DAY 7 - Camel Cards ](https://adventofcode.com/2023/day/7)
-- [x] [DAY 8 - Haunted Wasteland ](https://adventofcode.com/2023/day/8)
-- [x] [DAY 9 - Mirage Maintenance ](https://adventofcode.com/2023/day/9)
-- [ ] [DAY 10 - Pipe Maze ](https://adventofcode.com/2023/day/10)
-- [x] [DAY 11 - Cosmic Expansion ](https://adventofcode.com/2023/day/11)
+<details> 
+<summary>2023</summary>
+
+- <input checked="" disabled="" type="checkbox">[DAY 01 - Trebuchet?!](https://adventofcode.com/2023/day/1) </input>
+- <input checked="" disabled="" type="checkbox">[DAY 02 - Cube Conundrum](https://adventofcode.com/2023/day/2) </input>
+- <input checked="" disabled="" type="checkbox">[DAY 03 - Gear Ratios](https://adventofcode.com/2023/day/3) </input>
+- <input checked="" disabled="" type="checkbox">[DAY 04 - Scratchcards ](https://adventofcode.com/2023/day/4) </input>
+- <input disabled="" type="checkbox">[DAY 05 - If You Give A Seed A Fertilizer ](https://adventofcode.com/2023/day/5) </input>
+- <input checked="" disabled="" type="checkbox">[DAY 06 - Wait For It ](https://adventofcode.com/2023/day/6) </input>
+- <input checked="" disabled="" type="checkbox">[DAY 07 - Camel Cards ](https://adventofcode.com/2023/day/7) </input>
+- <input checked="" disabled="" type="checkbox">[DAY 08 - Haunted Wasteland ](https://adventofcode.com/2023/day/8) </input>
+- <input checked="" disabled="" type="checkbox">[DAY 09 - Mirage Maintenance ](https://adventofcode.com/2023/day/9) </input>
+- <input disabled="" type="checkbox">[DAY 10 - Pipe Maze ](https://adventofcode.com/2023/day/10) </input>
+- <input checked="" disabled="" type="checkbox">[DAY 11 - Cosmic Expansion ](https://adventofcode.com/2023/day/11) </input>
+
+</details>
+<details> 
+<summary>2024</summary>
+
+</details>

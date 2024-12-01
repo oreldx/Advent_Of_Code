@@ -10,7 +10,7 @@ def open_input():
             "Distance:  9  40  200",
         ]
     else:
-        with open("day_6/input.txt", 'r') as file:
+        with open("input.txt", 'r') as file:
             lines = file.readlines()
 
         if not lines:

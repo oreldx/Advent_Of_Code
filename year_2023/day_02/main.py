@@ -1,7 +1,7 @@
 
 
 def open_input():
-    with open("day_2/input.txt", 'r') as file:
+    with open("input.txt", 'r') as file:
         lines = file.readlines()
 
     if not lines:
