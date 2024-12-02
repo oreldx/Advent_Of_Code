@@ -42,7 +42,7 @@ def problem_1() -> int:
 
             if variation_direction == 0:
                 variation_direction = new_variation
-            # Variation changed direction
+
             if variation_direction * new_variation < 0:
                 return False
 
@@ -58,25 +58,53 @@ def problem_2() -> int:
         if len(report) < 2:
             return True
 
-        e1 = report[0]
-        e2 = report[1]
-        variation = e2 - e1
+        variation = report[0] - report[1]
         if 1 > abs(variation) or abs(variation) > 3:
-            if damped:
-                return False
-            return check_report(report[:1] + report[1 + 1 :], direction, True)
+            return False
 
         if direction == 0:
             direction = variation / abs(variation)
-        # Variation changed direction
         if direction * variation < 0:
-            if damped:
-                return False
-            return check_report(report[:1] + report[1 + 1 :], direction, True)
+            return False
 
         return check_report(report[1:], direction, damped)
 
-    return sum(check_report(report) for report in open_input())
+    count_safe_report = 0
+    for report in open_input():
+        for idx in range(len(report)):
+            if check_report(report[:idx] + report[idx + 1 :]):
+                count_safe_report += 1
+                break
+    return count_safe_report
+
+
+# NOTE: too much time lost here, brute force whatelse
+# issue here: I only test to remove the 1st element
+# remove the 2nd could be the solution by trying new combination
+# def problem_2() -> int:
+#     def check_report(
+#         report: list[int], direction: int = 0, damped: bool = False
+#     ) -> bool:
+#         if len(report) < 2:
+#             return True
+
+#         variation = report[0] - report[1]
+#         if 1 > abs(variation) or abs(variation) > 3:
+#             if damped:
+#                 return False
+#             return check_report(report[:1] + report[1 + 1 :], direction, True)
+
+#         if direction == 0:
+#             direction = variation / abs(variation)
+
+#         if direction * variation < 0:
+#             if damped:
+#                 return False
+#             return check_report(report[:1] + report[1 + 1 :], direction, True)
+
+#         return check_report(report[1:], direction, damped)
+
+#     return sum(check_report(report) for report in open_input())
 
 
 def main() -> None:
