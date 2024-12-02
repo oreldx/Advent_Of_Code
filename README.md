@@ -58,5 +58,6 @@ python main.py
 <summary>2024</summary>
 
 - <input checked="" disabled="" type="checkbox">[Day 01: Historian Hysteria](https://adventofcode.com/2024/day/1) </input>
+- <input checked="" disabled="" type="checkbox">[Day 02: Red-Nosed Reports](https://adventofcode.com/2024/day/2) </input>
 
 </details>
