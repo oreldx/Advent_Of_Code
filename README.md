@@ -41,23 +41,24 @@ python main.py
 <details> 
 <summary>2023</summary>
 
-- <input checked="" disabled="" type="checkbox">[DAY 01 - Trebuchet?!](https://adventofcode.com/2023/day/1) </input>
-- <input checked="" disabled="" type="checkbox">[DAY 02 - Cube Conundrum](https://adventofcode.com/2023/day/2) </input>
-- <input checked="" disabled="" type="checkbox">[DAY 03 - Gear Ratios](https://adventofcode.com/2023/day/3) </input>
-- <input checked="" disabled="" type="checkbox">[DAY 04 - Scratchcards ](https://adventofcode.com/2023/day/4) </input>
-- <input disabled="" type="checkbox">[DAY 05 - If You Give A Seed A Fertilizer ](https://adventofcode.com/2023/day/5) </input>
-- <input checked="" disabled="" type="checkbox">[DAY 06 - Wait For It ](https://adventofcode.com/2023/day/6) </input>
-- <input checked="" disabled="" type="checkbox">[DAY 07 - Camel Cards ](https://adventofcode.com/2023/day/7) </input>
-- <input checked="" disabled="" type="checkbox">[DAY 08 - Haunted Wasteland ](https://adventofcode.com/2023/day/8) </input>
-- <input checked="" disabled="" type="checkbox">[DAY 09 - Mirage Maintenance ](https://adventofcode.com/2023/day/9) </input>
-- <input disabled="" type="checkbox">[DAY 10 - Pipe Maze ](https://adventofcode.com/2023/day/10) </input>
-- <input checked="" disabled="" type="checkbox">[DAY 11 - Cosmic Expansion ](https://adventofcode.com/2023/day/11) </input>
+- [DAY 01 - Trebuchet?!](https://adventofcode.com/2023/day/1)
+- [DAY 02 - Cube Conundrum](https://adventofcode.com/2023/day/2)
+- [DAY 03 - Gear Ratios](https://adventofcode.com/2023/day/3)
+- [DAY 04 - Scratchcards ](https://adventofcode.com/2023/day/4)
+- [DAY 05 - If You Give A Seed A Fertilizer ](https://adventofcode.com/2023/day/5)
+- [DAY 06 - Wait For It ](https://adventofcode.com/2023/day/6)
+- [DAY 07 - Camel Cards ](https://adventofcode.com/2023/day/7)
+- [DAY 08 - Haunted Wasteland ](https://adventofcode.com/2023/day/8)
+- [DAY 09 - Mirage Maintenance ](https://adventofcode.com/2023/day/9)
+- [DAY 10 - Pipe Maze ](https://adventofcode.com/2023/day/10)
+- [DAY 11 - Cosmic Expansion ](https://adventofcode.com/2023/day/11)
 
 </details>
 <details> 
 <summary>2024</summary>
 
-- <input checked="" disabled="" type="checkbox">[Day 01: Historian Hysteria](https://adventofcode.com/2024/day/1) </input>
-- <input checked="" disabled="" type="checkbox">[Day 02: Red-Nosed Reports](https://adventofcode.com/2024/day/2) </input>
+- [Day 01: Historian Hysteria](https://adventofcode.com/2024/day/1)
+- [Day 02: Red-Nosed Reports](https://adventofcode.com/2024/day/2)
+- [Day 03: Mull It Over](https://adventofcode.com/2024/day/2)
 
 </details>
