@@ -131,8 +131,7 @@ def problem_2() -> int:
 
     return sum(
         int(instruction[0]) * int(instruction[1])
-        for expression in open_input()
-        for instruction in expression_parser(expression)
+        for instruction in expression_parser("".join(open_input()))
     )
 
 
