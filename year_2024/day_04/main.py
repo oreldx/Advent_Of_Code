@@ -42,45 +42,34 @@ def parse_line_to_matrix(line: str, matrix: list[list[str]]) -> list[list[str]]:
 
 def problem_1() -> int:
     matrix = open_input()
+    m = len(matrix)
+    n = len(matrix[0])
+
     pattern = "XMAS"
+    pattern_len = len(pattern)
+    directions = [
+        (0, -1),  # up
+        (0, 1),  # down
+        (-1, 0),  # left
+        (1, 0),  # right
+        (-1, -1),  # left-up
+        (-1, 1),  # left-down
+        (1, -1),  # right-up
+        (1, 1),  # right-down
+    ]
+
     strings = []
     for i, col in enumerate(matrix):
+        for j, cell in enumerate(col):
+            if cell != "X":
+                continue
+            strings += [
+                "".join(matrix[i + k * di][j + k * dj] for k in range(pattern_len))
+                for di, dj in directions
+                if 0 <= i + (pattern_len - 1) * di < m
+                and 0 <= j + (pattern_len - 1) * dj < n
+            ]
 
-        left = i >= len(pattern) - 1
-        right = i <= len(matrix) - len(pattern)
-        for j in range(len(col)):
-            up = j >= len(pattern) - 1
-            down = j <= len(col) - len(pattern)
-            if up:
-                strings.append("".join(col[j - k] for k in range(len(pattern))))
-            if down:
-                strings.append("".join(col[j + k] for k in range(len(pattern))))
-
-            if left:
-                strings.append("".join(matrix[i - k][j] for k in range(len(pattern))))
-
-            if right:
-                strings.append("".join(matrix[i + k][j] for k in range(len(pattern))))
-
-            if left and up:
-                strings.append(
-                    "".join(matrix[i - k][j - k] for k in range(len(pattern)))
-                )
-
-            if left and down:
-                strings.append(
-                    "".join(matrix[i - k][j + k] for k in range(len(pattern)))
-                )
-
-            if right and up:
-                strings.append(
-                    "".join(matrix[i + k][j - k] for k in range(len(pattern)))
-                )
-
-            if right and down:
-                strings.append(
-                    "".join(matrix[i + k][j + k] for k in range(len(pattern)))
-                )
     return sum(1 for s in strings if s == pattern)
 
 
@@ -88,24 +77,27 @@ def problem_2() -> int:
     matrix = open_input()
     pattern = "SAM"
     patterns = [pattern, pattern[::-1]]
-    strings = []
+    len_pattern = len(pattern)
+
+    x_mas_count = 0
     for i, col in enumerate(matrix):
-        left = i >= 1
-        right = i <= len(matrix) - 2
+        x_clear = 1 <= i <= len(matrix) - 2
+        if not x_clear:
+            continue
         for j, cell in enumerate(col):
             if cell in ["X", "S", "M"]:
                 continue
-            up = j >= 1
-            down = j <= len(col) - 2
-            if not left or not right or not up or not down:
+            y_clear = 1 <= j <= len(col) - 2
+            if not y_clear:
                 continue
 
-            l1 = "".join(matrix[i - 1 + k][j - 1 + k] for k in range(len(pattern)))
-            l2 = "".join(matrix[i - 1 + k][j + 1 - k] for k in range(len(pattern)))
-
-            if l1 in patterns and l2 in patterns:
-                strings.append(1)
-    return sum(strings)
+            diags = [
+                "".join(matrix[i - 1 + k][j + dj - dj * k] for k in range(len_pattern))
+                for dj in [-1, 1]
+            ]
+            if all(diag in patterns for diag in diags):
+                x_mas_count += 1
+    return x_mas_count
 
 
 def main() -> None:
