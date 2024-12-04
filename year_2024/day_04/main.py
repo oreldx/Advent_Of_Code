@@ -90,10 +90,11 @@ def problem_2() -> int:
     patterns = [pattern, pattern[::-1]]
     strings = []
     for i, col in enumerate(matrix):
-
         left = i >= 1
         right = i <= len(matrix) - 2
-        for j in range(len(col)):
+        for j, cell in enumerate(col):
+            if cell in ["X", "S", "M"]:
+                continue
             up = j >= 1
             down = j <= len(col) - 2
             if not left or not right or not up or not down:
