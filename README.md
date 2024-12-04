@@ -59,6 +59,7 @@ python main.py
 
 - [Day 01: Historian Hysteria](https://adventofcode.com/2024/day/1)
 - [Day 02: Red-Nosed Reports](https://adventofcode.com/2024/day/2)
-- [Day 03: Mull It Over](https://adventofcode.com/2024/day/2)
+- [Day 03: Mull It Over](https://adventofcode.com/2024/day/3)
+- [Day 04: Ceres Search](https://adventofcode.com/2024/day/4)
 
 </details>
