@@ -1,7 +1,7 @@
-DEBUG_PROBLEM = 1
+DEBUG_PROBLEM = None
 
 
-def open_input() -> list[list[int]]:
+def open_input() -> list[list[str]]:
     if DEBUG_PROBLEM in [1, 2]:
         print("DEBUG MODE ON")
         matrix = []
@@ -42,7 +42,46 @@ def parse_line_to_matrix(line: str, matrix: list[list[str]]) -> list[list[str]]:
 
 def problem_1() -> int:
     matrix = open_input()
-    return 0
+    pattern = "XMAS"
+    strings = []
+    for i, col in enumerate(matrix):
+
+        left = i >= len(pattern) - 1
+        right = i <= len(matrix) - len(pattern)
+        for j in range(len(col)):
+            up = j >= len(pattern) - 1
+            down = j <= len(col) - len(pattern)
+            if up:
+                strings.append("".join(col[j - k] for k in range(len(pattern))))
+            if down:
+                strings.append("".join(col[j + k] for k in range(len(pattern))))
+
+            if left:
+                strings.append("".join(matrix[i - k][j] for k in range(len(pattern))))
+
+            if right:
+                strings.append("".join(matrix[i + k][j] for k in range(len(pattern))))
+
+            if left and up:
+                strings.append(
+                    "".join(matrix[i - k][j - k] for k in range(len(pattern)))
+                )
+
+            if left and down:
+                strings.append(
+                    "".join(matrix[i - k][j + k] for k in range(len(pattern)))
+                )
+
+            if right and up:
+                strings.append(
+                    "".join(matrix[i + k][j - k] for k in range(len(pattern)))
+                )
+
+            if right and down:
+                strings.append(
+                    "".join(matrix[i + k][j + k] for k in range(len(pattern)))
+                )
+    return sum(1 for s in strings if s == pattern)
 
 
 def problem_2() -> int:
