@@ -85,7 +85,26 @@ def problem_1() -> int:
 
 
 def problem_2() -> int:
-    return 0
+    matrix = open_input()
+    pattern = "SAM"
+    patterns = [pattern, pattern[::-1]]
+    strings = []
+    for i, col in enumerate(matrix):
+
+        left = i >= 1
+        right = i <= len(matrix) - 2
+        for j in range(len(col)):
+            up = j >= 1
+            down = j <= len(col) - 2
+            if not left or not right or not up or not down:
+                continue
+
+            l1 = "".join(matrix[i - 1 + k][j - 1 + k] for k in range(len(pattern)))
+            l2 = "".join(matrix[i - 1 + k][j + 1 - k] for k in range(len(pattern)))
+
+            if l1 in patterns and l2 in patterns:
+                strings.append(1)
+    return sum(strings)
 
 
 def main() -> None:
