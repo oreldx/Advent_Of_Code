@@ -1,4 +1,4 @@
-DEBUG_PROBLEM = 2
+DEBUG_PROBLEM = None
 
 
 def open_input() -> tuple:
@@ -57,18 +57,36 @@ def problem_2() -> int:
     def review_ordering_list(
         ordering_rules: dict, idx: int, order_list: list[int]
     ) -> list[int]:
-        if idx >= len(order_list):
+        if idx == len(order_list) - 2:
             return order_list
-        # TODO
-        review_ordering_list(ordering_rules, idx + 1, order_list)
+
+        n = order_list[idx]
+        for idx_m, m in enumerate(order_list[idx + 1 :]):
+            if m in ordering_rules.get(n, []):
+                new_order_list = order_list.copy()
+                new_order_list[idx], new_order_list[idx_m + idx + 1] = (
+                    new_order_list[idx_m + idx + 1],
+                    new_order_list[idx],
+                )
+                return review_ordering_list(ordering_rules, idx, new_order_list)
+
+        return review_ordering_list(ordering_rules, idx + 1, order_list)
 
     ordering_rules, order_lists = open_input()
+
     updated_lists = []
     for order_list in order_lists:
         reversed_order_list = order_list[::-1]
-        new_list = review_ordering_list(ordering_rules, 0, reversed_order_list)
-        if reversed_order_list != new_list:
-            updated_lists.append(new_list)
+        invalid = False
+        for idx, n in enumerate(reversed_order_list):
+            n_rules = ordering_rules.get(n, [])
+            if any(m in reversed_order_list[idx:] for m in n_rules):
+                invalid = True
+                break
+        if invalid:
+            updated_lists.append(
+                review_ordering_list(ordering_rules, 0, reversed_order_list)
+            )
 
     return sum(order_list[len(order_list) // 2] for order_list in updated_lists)
 
