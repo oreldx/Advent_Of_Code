@@ -28,29 +28,31 @@ def parse_line_to_matrix(input_text: str) -> tuple:
     return matrix, start_pos
 
 
+def rotate_guard(direction: str) -> str:
+    directions = ["^", ">", "v", "<"]
+    return directions[(directions.index(direction) + 1) % 4]
+
+
+def move_guard(matrix: list[str], pos: tuple, direction: str) -> tuple:
+    x, y = pos
+    match direction:
+        case "^":
+            y -= 1
+        case "v":
+            y += 1
+        case "<":
+            x -= 1
+        case ">":
+            x += 1
+    if y < 0 or y > len(matrix) - 1 or x < 0 or x > len(matrix[0]) - 1:
+        return pos, direction
+
+    if matrix[y][x] == "#":
+        return pos, rotate_guard(direction)
+    return (x, y), direction
+
+
 def problem_1() -> int:
-    def rotate_guard(direction: str) -> str:
-        directions = ["^", ">", "v", "<"]
-        return directions[(directions.index(direction) + 1) % 4]
-
-    def move_guard(matrix: list[str], pos: tuple, direction: str) -> tuple:
-        x, y = pos
-        match direction:
-            case "^":
-                y -= 1
-            case "v":
-                y += 1
-            case "<":
-                x -= 1
-            case ">":
-                x += 1
-        if y < 0 or y > len(matrix) - 1 or x < 0 or x > len(matrix[0]) - 1:
-            return pos, direction
-
-        if matrix[y][x] == "#":
-            return pos, rotate_guard(direction)
-        return (x, y), direction
-
     matrix, current_pos = open_input()
     current_direction = "^"
     return_to_start = False
@@ -69,7 +71,38 @@ def problem_1() -> int:
 
 
 def problem_2() -> int:
-    return 0
+    def is_map_looping(matrix: list[str], current_pos: tuple) -> bool:
+        positions = set()
+        current_direction = "^"
+        while True:
+            old_pos, old_direction = current_pos, current_direction
+            current_pos, current_direction = move_guard(
+                matrix, current_pos, current_direction
+            )
+            # guard didn't move or rotate because out of bounds
+            if old_pos == current_pos and old_direction == current_direction:
+                return False
+
+            pos_key = f"{current_pos[0]}_{current_pos[1]}_{current_direction}"
+            # guard already visited this position in this direction
+            if pos_key in positions:
+                return True
+            positions.add(pos_key)
+
+    matrix, current_pos = open_input()
+
+    valid_loop = 0
+    for y, row in enumerate(matrix):
+        for x, cell in enumerate(row):
+            if cell in ["#", "^"]:
+                continue
+
+            new_map = matrix.copy()
+            new_map[y] = new_map[y][:x] + "#" + new_map[y][x + 1 :]
+
+            if is_map_looping(new_map, current_pos):
+                valid_loop += 1
+    return valid_loop
 
 
 def main() -> None:

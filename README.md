@@ -61,5 +61,7 @@ python main.py
 - [Day 02: Red-Nosed Reports](https://adventofcode.com/2024/day/2)
 - [Day 03: Mull It Over](https://adventofcode.com/2024/day/3)
 - [Day 04: Ceres Search](https://adventofcode.com/2024/day/4)
+- [Day 05: Print Queue](https://adventofcode.com/2024/day/5)
+- [Day 06: Guard Gallivant](https://adventofcode.com/2024/day/6)
 
 </details>
