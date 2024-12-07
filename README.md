@@ -63,5 +63,6 @@ python main.py
 - [Day 04: Ceres Search](https://adventofcode.com/2024/day/4)
 - [Day 05: Print Queue](https://adventofcode.com/2024/day/5)
 - [Day 06: Guard Gallivant](https://adventofcode.com/2024/day/6)
+- [Day 07: Bridge Repair](https://adventofcode.com/2024/day/7)
 
 </details>
