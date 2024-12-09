@@ -1,4 +1,4 @@
-DEBUG_PROBLEM = 2
+DEBUG_PROBLEM = None
 
 
 def open_input(problem_idx) -> str | list:
@@ -33,17 +33,13 @@ def open_input(problem_idx) -> str | list:
                 free_space = False
                 file_idx = 0
                 for c in line:
+                    file_list = []
                     for _ in range(int(c)):
                         if free_space:
-                            if "." not in disk[-1]:
-                                disk.append(".")
-                                continue
-                            disk[-1] += "."
+                            file_list.append(".")
                             continue
-                        if len(disk) > 0 and str(file_idx) in disk[-1]:
-                            disk[-1] += str(file_idx)
-                            continue
-                        disk.append(str(file_idx))
+                        file_list.append(str(file_idx))
+                    disk.append(file_list)
                     free_space = not free_space
                     if not free_space:
                         file_idx += 1
@@ -51,6 +47,7 @@ def open_input(problem_idx) -> str | list:
 
 
 def problem_1() -> int:
+    # HOW does this even work with the 2 digigts file issue
     storage = open_input(1)
     free_space_idx = 0
     for n_idx_reverse, n in enumerate(storage[::-1]):
@@ -71,32 +68,37 @@ def problem_1() -> int:
 
 
 def problem_2() -> int:
-    def add_first_enough_space(storage: list, n: str, curs: int) -> None:
-        for idx, s in enumerate(storage):
-            if "." in s and len(s) >= len(n):
-                storage[idx] = n
-                left_space = len(s) - len(n)
-                if left_space <= 0:
-                    return
-                storage.pop(curs)
-                storage.insert(idx + 1, "." * left_space)
-                return
+    def add_first_enough_space(storage: list, n_file: str, curs: int) -> bool:
+        for idx, s in enumerate(storage[:curs]):
+            if "." in s and len(s) >= len(n_file):
+                storage[idx] = n_file
+                storage[curs] = ["." for _ in range(len(n_file))]
+                left_space = len(s) - len(n_file)
+                if left_space > 0:
+                    storage.insert(idx + 1, ["." for _ in range(left_space)])
+                return True
+        return False
 
     storage = open_input(2)
 
     curs = len(storage) - 1
     while curs >= 0:
-        n = storage[curs]
-        if "." in n:
+        n_file = storage[curs]
+        if "." in n_file:
             curs -= 1
             continue
-        len1 = len(storage)
-        add_first_enough_space(storage, n, curs)
-        len2 = len(storage)
-        if len1 == len2:
-            curs -= 1
-    print("".join(storage))
-    return 0
+        if add_first_enough_space(storage, n_file, curs):
+            continue
+        curs -= 1
+
+    global_idx = 0
+    check_sum = 0
+    for s in storage:
+        for n in s:
+            if n != ".":
+                check_sum += global_idx * int(n)
+            global_idx += 1
+    return check_sum
 
 
 def main() -> None:
