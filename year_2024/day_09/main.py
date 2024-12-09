@@ -71,7 +71,31 @@ def problem_1() -> int:
 
 
 def problem_2() -> int:
+    def add_first_enough_space(storage: list, n: str, curs: int) -> None:
+        for idx, s in enumerate(storage):
+            if "." in s and len(s) >= len(n):
+                storage[idx] = n
+                left_space = len(s) - len(n)
+                if left_space <= 0:
+                    return
+                storage.pop(curs)
+                storage.insert(idx + 1, "." * left_space)
+                return
+
     storage = open_input(2)
+
+    curs = len(storage) - 1
+    while curs >= 0:
+        n = storage[curs]
+        if "." in n:
+            curs -= 1
+            continue
+        len1 = len(storage)
+        add_first_enough_space(storage, n, curs)
+        len2 = len(storage)
+        if len1 == len2:
+            curs -= 1
+    print("".join(storage))
     return 0
 
 
