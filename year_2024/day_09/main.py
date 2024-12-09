@@ -1,7 +1,7 @@
 DEBUG_PROBLEM = 2
 
 
-def open_input() -> tuple:
+def open_input(problem_idx) -> str | list:
     filepath = "input.txt"
     if DEBUG_PROBLEM in [1, 2]:
         print("DEBUG MODE ON")
@@ -9,26 +9,49 @@ def open_input() -> tuple:
 
     disk = []
     with open(filepath, "r", encoding="utf-8") as f:
-        while True:
-            line = f.readline().replace("\n", "")
-            if not line:
-                return disk
-            free_space = False
-            file_idx = 0
-            for c in line:
-                for _ in range(int(c)):
-                    if free_space:
-                        disk.append(".")
-                        continue
-                    disk.append(file_idx)
-                free_space = not free_space
-                if not free_space:
-                    file_idx += 1
+        if problem_idx == 1:
+            while True:
+                line = f.readline().replace("\n", "")
+                if not line:
+                    return disk
+                free_space = False
+                file_idx = 0
+                for c in line:
+                    for _ in range(int(c)):
+                        if free_space:
+                            disk.append(".")
+                            continue
+                        disk.append(file_idx)
+                    free_space = not free_space
+                    if not free_space:
+                        file_idx += 1
+        if problem_idx == 2:
+            while True:
+                line = f.readline().replace("\n", "")
+                if not line:
+                    return disk
+                free_space = False
+                file_idx = 0
+                for c in line:
+                    for _ in range(int(c)):
+                        if free_space:
+                            if "." not in disk[-1]:
+                                disk.append(".")
+                                continue
+                            disk[-1] += "."
+                            continue
+                        if len(disk) > 0 and str(file_idx) in disk[-1]:
+                            disk[-1] += str(file_idx)
+                            continue
+                        disk.append(str(file_idx))
+                    free_space = not free_space
+                    if not free_space:
+                        file_idx += 1
+    return None
 
 
 def problem_1() -> int:
-    storage = open_input()
-
+    storage = open_input(1)
     free_space_idx = 0
     for n_idx_reverse, n in enumerate(storage[::-1]):
         if n == ".":
@@ -48,8 +71,7 @@ def problem_1() -> int:
 
 
 def problem_2() -> int:
-    storage = open_input()
-
+    storage = open_input(2)
     return 0
 
 
