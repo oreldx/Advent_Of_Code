@@ -66,5 +66,6 @@ python main.py
 - [Day 07: Bridge Repair](https://adventofcode.com/2024/day/7)
 - [Day 08: Resonant Collinearity](https://adventofcode.com/2024/day/8)
 - [Day 09: Disk Fragmenter](https://adventofcode.com/2024/day/9)
+- [Day 10: Hoof It](https://adventofcode.com/2024/day/10)
 
 </details>

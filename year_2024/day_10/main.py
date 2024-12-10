@@ -1,4 +1,4 @@
-DEBUG_PROBLEM = 1
+DEBUG_PROBLEM = None
 
 
 def open_input() -> str | list:
@@ -20,49 +20,55 @@ def open_input() -> str | list:
                 topographic_map[idx].append(int(c))
 
 
+def get_adjacent(x: int, y: int, n: int, m: int) -> list:
+    adjacents = []
+    for i in [-1, 1]:
+        if 0 <= x + i < n:
+            adjacents.append((x + i, y))
+        if 0 <= y + i < m:
+            adjacents.append((x, y + i))
+    return adjacents
+
+
+def explore_path(x: int, y: int, path: list, topo_map: list, trails: list) -> None:
+    n, m = len(topo_map), len(topo_map[0])
+    for adj_x, adj_y in get_adjacent(x, y, n, m):
+        if topo_map[adj_x][adj_y] != topo_map[x][y] - 1:  # Only go down by 1
+            continue
+        if (adj_x, adj_y) in path:  # Don't go back to the same cell
+            continue
+        if topo_map[adj_x][adj_y] == 0:  # Reach thes tart of the trail
+            trails.append(path + [(adj_x, adj_y)])
+        explore_path(adj_x, adj_y, path + [(adj_x, adj_y)], topo_map, trails)
+
+
 def problem_1() -> int:
-    topographic_map = open_input()
     trails = []
-
-    def get_adjacent(x: int, y: int) -> list:
-        adjacent = []
-        for i in [-1, 1]:
-            if 0 <= x + i < len(topographic_map):
-
-                adjacent.append((x + i, y))
-            if 0 <= y + i < len(topographic_map[0]):
-                adjacent.append((x, y + i))
-
-        return [
-            adj
-            for adj in adjacent
-            if topographic_map[adj[0]][adj[1]] == topographic_map[x][y] - 1
-            or topographic_map[adj[0]][adj[1]] == topographic_map[x][y] + 1
-            or topographic_map[adj[0]][adj[1]] == topographic_map[x][y]
-        ]
-
-    def explore_path(x: int, y: int, path: list):
-        adjacents = get_adjacent(x, y)
-        if not adjacents:
-            return
-
-        for adj in adjacents:
-            if adj in path:
-                continue
-            if topographic_map[adj[0]][adj[1]] == 0:
-                trails.append(path + [adj])
-            explore_path(adj[0], adj[1], path + [adj])
+    highest_point = 9
+    topographic_map = open_input()
 
     for m, col in enumerate(topographic_map):
         for n, cell in enumerate(col):
-            print(n, m)
-            if cell == 9:
-                explore_path(m, n, [(m, n)])
-    return 0
+            if cell == highest_point:  # Start from the top
+                explore_path(m, n, [(m, n)], topographic_map, trails)
+    trailheads = {}
+    for trail in trails:
+        if trail[-1] not in trailheads:
+            trailheads[trail[-1]] = set()
+        trailheads[trail[-1]].add(trail[0])
+    return sum(len(top) for top in trailheads.values())
 
 
 def problem_2() -> int:
-    return 0
+    trails = []
+    highest_point = 9
+    topographic_map = open_input()
+
+    for m, col in enumerate(topographic_map):
+        for n, cell in enumerate(col):
+            if cell == highest_point:  # Top to bottom
+                explore_path(m, n, [(m, n)], topographic_map, trails)
+    return len(trails)
 
 
 def main() -> None:
