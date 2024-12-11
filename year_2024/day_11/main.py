@@ -1,4 +1,6 @@
-DEBUG_PROBLEM = 2
+from functools import cache
+
+DEBUG_PROBLEM = None
 
 
 def open_input() -> list[int]:
@@ -31,35 +33,24 @@ def problem_1() -> int:
 
 
 def problem_2() -> int:
-    cache = {}
+    @cache
+    def update_stone(stone: int, current_blink: int) -> list[int]:
+        if current_blink == 75:
+            return 1
 
-    def update_stone(stone: int) -> list[int]:
-        cached_stone = cache.get(stone)
-        if cached_stone:
-            return cached_stone
-        prout = []
         if stone == 0:
-            prout = [1]
+            return update_stone(1, current_blink + 1)
 
-        elif len(str(stone)) % 2 == 0:
+        if len(str(stone)) % 2 == 0:
             right_stone = str(stone)[len(str(stone)) // 2 :]
             left_stone = str(stone)[: len(str(stone)) // 2]
-            prout = [int(left_stone), int(right_stone)]
-        else:
-            prout = [stone * 2024]
+            return update_stone(int(left_stone), current_blink + 1) + update_stone(
+                int(right_stone), current_blink + 1
+            )
 
-        cache[stone] = prout
-        return prout
+        return update_stone(stone * 2024, current_blink + 1)
 
-    blinking_times = 75
-    stones = open_input()
-    for i in range(blinking_times):
-        print(f"Step {i + 1}: {len(stones)}")
-        new_stones = []
-        for stone in stones:
-            new_stones += update_stone(stone)
-        stones = new_stones
-    return len(stones)
+    return sum(update_stone(stone, 0) for stone in open_input())
 
 
 def main() -> None:
