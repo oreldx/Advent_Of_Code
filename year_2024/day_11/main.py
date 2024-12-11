@@ -1,4 +1,4 @@
-DEBUG_PROBLEM = None
+DEBUG_PROBLEM = 2
 
 
 def open_input() -> list[int]:
@@ -12,13 +12,54 @@ def open_input() -> list[int]:
 
 
 def problem_1() -> int:
+    blinking_times = 25
     stones = open_input()
-    print(stones)
-    return 0
+    for _ in range(blinking_times):
+        new_stones = []
+        for stone in stones:
+            if stone == 0:
+                new_stones.append(1)
+            elif len(str(stone)) % 2 == 0:
+                right_stone = str(stone)[len(str(stone)) // 2 :]
+                left_stone = str(stone)[: len(str(stone)) // 2]
+
+                new_stones += [int(left_stone), int(right_stone)]
+            else:
+                new_stones.append(stone * 2024)
+        stones = new_stones
+    return len(stones)
 
 
 def problem_2() -> int:
-    return 0
+    cache = {}
+
+    def update_stone(stone: int) -> list[int]:
+        cached_stone = cache.get(stone)
+        if cached_stone:
+            return cached_stone
+        prout = []
+        if stone == 0:
+            prout = [1]
+
+        elif len(str(stone)) % 2 == 0:
+            right_stone = str(stone)[len(str(stone)) // 2 :]
+            left_stone = str(stone)[: len(str(stone)) // 2]
+            prout = [int(left_stone), int(right_stone)]
+        else:
+            prout = [stone * 2024]
+
+        cache[stone] = prout
+        return prout
+
+    blinking_times = 75
+    stones = open_input()
+    for i in range(blinking_times):
+        print(f"Step {i + 1}: {len(stones)}")
+        new_stones = []
+        for stone in stones:
+            new_stones += update_stone(stone)
+        stones = new_stones
+    return len(stones)
 
 
 def main() -> None:
