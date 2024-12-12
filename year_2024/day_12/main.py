@@ -59,25 +59,6 @@ def problem_1() -> int:
     return cost
 
 
-def create_graph(region: list) -> list:
-    graph = {}
-    for x, y in region:
-        is_on_edge = False
-        for i in [-1, 1]:
-            if (x + i, y) not in region:
-                is_on_edge = True
-                break
-            if (x, y + i) not in region:
-                is_on_edge = True
-                break
-        if not is_on_edge:
-            continue
-
-        # TODO
-
-    return graph
-
-
 def problem_2() -> int:
     explored = set()
     region_types = {}
@@ -102,15 +83,17 @@ def problem_2() -> int:
                 continue
             explored.add((m, n))
             region_types.setdefault(plant, []).append(explore_garden(m, n))
+
     cost = 0
     for plant, regions in region_types.items():
         for region in regions:
             corners = 0
-            region = create_graph(region)
-
+            # TODO
+            # 1. Find the edges of the region
+            # 2. Find the corners of the region
+            #   - Outside cornes: if 2 consecutive edges are not in the region
+            #   - Inner corners: if 2 consecutive edges are in the region
             cost += corners * len(region)
-            print(f"Plant {plant} area: {len(region)} cornes: {corners} ")
-        break
 
     return cost
 
