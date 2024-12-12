@@ -1,5 +1,4 @@
-DEBUG_PROBLEM = 1
-from pprint import pprint
+DEBUG_PROBLEM = 2
 
 
 def open_input() -> list[str]:
@@ -24,33 +23,31 @@ def get_adjacent(x: int, y: int, n: int, m: int) -> list:
 
 def problem_1() -> int:
     explored = set()
-    regions = {}
+    region_types = {}
     garden_plots = open_input()
 
     def explore_garden(x: int, y: int) -> None:
         current_flower = garden_plots[x][y]
         adjacents = get_adjacent(x, y, len(garden_plots), len(garden_plots[0]))
-
+        tmp = [(x, y)]
         for adj_x, adj_y in adjacents:
             if (adj_x, adj_y) in explored:
                 continue
             if garden_plots[adj_x][adj_y] != current_flower:
                 continue
             explored.add((adj_x, adj_y))
-            if current_flower not in regions:
-                regions[current_flower] = []
-            regions[current_flower] = regions[current_flower] + [(adj_x, adj_y)]
+            tmp += explore_garden(adj_x, adj_y)
+        return tmp
 
     for m, row in enumerate(garden_plots):
-        for n, _ in enumerate(row):
+        for n, plant in enumerate(row):
             if (m, n) in explored:
                 continue
             explored.add((m, n))
-            explore_garden(m, n)
-
-    sum_ = 0
-    for rgs in regions.values():
-        for region in rgs:
+            region_types.setdefault(plant, []).append(explore_garden(m, n))
+    cost = 0
+    for regions in region_types.values():
+        for region in regions:
             borders = 0
             for plot in region:
                 for i in [-1, 1]:
@@ -58,13 +55,64 @@ def problem_1() -> int:
                         borders += 1
                     if (plot[0], plot[1] + i) not in region:
                         borders += 1
-            sum_ += borders * len(region)
-    print(sum_)
-    return 0
+            cost += borders * len(region)
+    return cost
+
+
+def create_graph(region: list) -> list:
+    graph = {}
+    for x, y in region:
+        is_on_edge = False
+        for i in [-1, 1]:
+            if (x + i, y) not in region:
+                is_on_edge = True
+                break
+            if (x, y + i) not in region:
+                is_on_edge = True
+                break
+        if not is_on_edge:
+            continue
+
+        # TODO
+
+    return graph
 
 
 def problem_2() -> int:
-    return 0
+    explored = set()
+    region_types = {}
+    garden_plots = open_input()
+
+    def explore_garden(x: int, y: int) -> None:
+        current_flower = garden_plots[x][y]
+        adjacents = get_adjacent(x, y, len(garden_plots), len(garden_plots[0]))
+        tmp = [(x, y)]
+        for adj_x, adj_y in adjacents:
+            if (adj_x, adj_y) in explored:
+                continue
+            if garden_plots[adj_x][adj_y] != current_flower:
+                continue
+            explored.add((adj_x, adj_y))
+            tmp += explore_garden(adj_x, adj_y)
+        return tmp
+
+    for m, row in enumerate(garden_plots):
+        for n, plant in enumerate(row):
+            if (m, n) in explored:
+                continue
+            explored.add((m, n))
+            region_types.setdefault(plant, []).append(explore_garden(m, n))
+    cost = 0
+    for plant, regions in region_types.items():
+        for region in regions:
+            corners = 0
+            region = create_graph(region)
+
+            cost += corners * len(region)
+            print(f"Plant {plant} area: {len(region)} cornes: {corners} ")
+        break
+
+    return cost
 
 
 def main() -> None:
