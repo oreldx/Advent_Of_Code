@@ -69,5 +69,6 @@ python main.py
 - ( * * ) [Day 10: Hoof It](https://adventofcode.com/2024/day/10)
 - ( * * ) [Day 11: Plutonian Pebbles](https://adventofcode.com/2024/day/11)
 - ( * _ ) [Day 12: Garden Groups](https://adventofcode.com/2024/day/12)
+- ( * * ) [Day 13: Claw Contraption](https://adventofcode.com/2024/day/13)
 
 </details>
