@@ -1,3 +1,6 @@
+import operator
+import functools
+
 DEBUG_PROBLEM = None
 
 
@@ -39,6 +42,17 @@ def print_robot_on_space(robot: dict, space_size: tuple) -> None:
         print()
 
 
+def print_robots_on_space(robots: list[dict], space_size: tuple) -> None:
+    robots_positions = [robot["p"] for robot in robots]
+    for j in range(space_size[1]):
+        for i in range(space_size[0]):
+            if (i, j) in robots_positions:
+                print("#", end="")
+            else:
+                print(".", end="")
+        print()
+
+
 def problem_1() -> int:
     robots, space_size = open_input()
     seconds_elapsed = 100
@@ -50,25 +64,35 @@ def problem_1() -> int:
                 (robot["p"][1] + robot["v"][1]) % space_size[1],
             )
 
-    q1 = 0
-    q2 = 0
-    q3 = 0
-    q4 = 0
+    qs = [0 for _ in range(4)]
+    half_x, half_y = space_size[0] // 2, space_size[1] // 2
     for robot in robots:
-        if robot["p"][0] < space_size[0] // 2 and robot["p"][1] < space_size[1] // 2:
-            q1 += 1
-        elif robot["p"][0] > space_size[0] // 2 and robot["p"][1] < space_size[1] // 2:
-            q2 += 1
-        elif robot["p"][0] < space_size[0] // 2 and robot["p"][1] > space_size[1] // 2:
-            q3 += 1
-        elif robot["p"][0] > space_size[0] // 2 and robot["p"][1] > space_size[1] // 2:
-            q4 += 1
+        if robot["p"][0] < half_x and robot["p"][1] < half_y:
+            qs[0] += 1
+        elif robot["p"][0] > half_x and robot["p"][1] < half_y:
+            qs[1] += 1
+        elif robot["p"][0] < half_x and robot["p"][1] > half_y:
+            qs[2] += 1
+        elif robot["p"][0] > half_x and robot["p"][1] > half_y:
+            qs[3] += 1
 
-    return q1 * q2 * q3 * q4
+    return functools.reduce(operator.mul, qs)
 
 
 def problem_2() -> int:
-    return 0
+    robots, space_size = open_input()
+    seconds_elapsed = 10000
+    frame_entropies = []
+    for _ in range(seconds_elapsed):
+        lines = [["." for _ in range(space_size[0])] for _ in range(space_size[1])]
+        for robot in robots:
+            robot["p"] = (
+                (robot["p"][0] + robot["v"][0]) % space_size[0],
+                (robot["p"][1] + robot["v"][1]) % space_size[1],
+            )
+            lines[robot["p"][1]][robot["p"][0]] = "#"
+        frame_entropies.append(sum(1 for line in lines if "#" * 7 in "".join(line)))
+    return frame_entropies.index(max(frame_entropies))
 
 
 def main() -> None:
