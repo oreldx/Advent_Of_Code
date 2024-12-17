@@ -1,10 +1,5 @@
-DEBUG_PROBLEM = 1
-DIRECTIONS = {
-    "^": (-1, 0),
-    "v": (1, 0),
-    "<": (0, -1),
-    ">": (0, 1)
-}
+DEBUG_PROBLEM = None
+DIRECTIONS = {"^": (0, -1), "v": (0, 1), "<": (-1, 0), ">": (1, 0)}
 
 
 def open_input() -> tuple:
@@ -28,24 +23,31 @@ def open_input() -> tuple:
             if half_part:
                 instructions += line
                 continue
-            
+
             if robot == (None, None) and "@" in line:
-                robot = (line.index("@"), len(matrix) - 1)
+                robot = (line.index("@"), len(matrix))
             matrix.append(list(line))
 
         return matrix, instructions, robot
 
 
+def print_matrix(matrix: list[list]) -> None:
+    for row in matrix:
+        print("".join(row))
+
 
 def attempt_move_robot(robot: tuple, direction: tuple, matrix: list[list]) -> tuple:
-    adj_x, adj_y = robot[0] + DIRECTIONS[direction][0], robot[1] + DIRECTIONS[direction][1]
+    adj_x, adj_y = (
+        robot[0] + DIRECTIONS[direction][0],
+        robot[1] + DIRECTIONS[direction][1],
+    )
     if matrix[adj_y][adj_x] == ".":
-        return robot[0] + adj_x, robot[1] + adj_y
+        return adj_x, adj_y
     return robot
+
 
 def problem_1() -> int:
     matrix, instructions, robot = open_input()
-
     for instruction in instructions:
         robot_moved = attempt_move_robot(robot, instruction, matrix)
         if robot_moved != robot:
@@ -54,23 +56,42 @@ def problem_1() -> int:
             robot = robot_moved
             continue
 
-        match instruction:
-            case '^':
-                # Retrieve all block until either a wall or empty space
-                # If wall, then continue
-                # If empty space, then shift robot and blocks
-                pass
-            case 'v':
-                pass
-            case '<':
-                pass
-            case '>':
-                pass
-            case _:
-                pass
+        curs = robot
+        while matrix[curs[1]][curs[0]] not in ["#", "."]:
+            curs = (
+                curs[0] + DIRECTIONS[instruction][0],
+                curs[1] + DIRECTIONS[instruction][1],
+            )
+        if matrix[curs[1]][curs[0]] == "#":
+            continue
 
+        while curs != robot:
+            matrix[curs[1]][curs[0]] = matrix[curs[1] - DIRECTIONS[instruction][1]][
+                curs[0] - DIRECTIONS[instruction][0]
+            ]
+            curs = (
+                curs[0] - DIRECTIONS[instruction][0],
+                curs[1] - DIRECTIONS[instruction][1],
+            )
 
-    return 0
+        matrix[robot[1]][robot[0]] = "."
+        robot = (
+            robot[0] + DIRECTIONS[instruction][0],
+            robot[1] + DIRECTIONS[instruction][1],
+        )
+
+    sum_ = 0
+    for j, col in enumerate(matrix):
+        for i, cell in enumerate(col):
+            if cell == "O":
+                sum_ += (j) * 100 + (i)
+
+    return sum(
+        (j) * 100 + (i)
+        for j, col in enumerate(matrix)
+        for i, cell in enumerate(col)
+        if cell == "O"
+    )
 
 
 def problem_2() -> int:
